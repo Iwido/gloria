@@ -8,7 +8,1873 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public void RealizarPago() {
+public class Uwux2 {
+    ArrayList<Double>ArraysPrecios=new ArrayList<>();
+    ArrayList<String>ArraysProductos=new ArrayList<>();
+    String DNiIngresado,NombreIngresado,ApellidoIngresado;
+    String ContrasenaIngresado;
+    Scanner raja=new Scanner(System.in);
+    public void Empezar(){
+        int OpcionEmpezar;
+        do {
+            System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+            System.out.println("     BIENVENIDO A GLORIA   ");
+            System.out.println("1. Iniciar sesion");
+            System.out.println("2. Crear Cuenta");
+            System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+            OpcionEmpezar = raja.nextInt();
+            switch (OpcionEmpezar) {
+                case 1:
+                    Inicio();
+                    break;
+                case 2:
+                    Registro();
+                    break;
+                default:
+                    System.out.println("Opcion no Valida");
+                    break;
+            }
+        }while (OpcionEmpezar!=0);
+    }
+    public void Inicio(){
+        raja.nextLine();
+        boolean iniciar = false;
+        int contador = 0;
+        while (!iniciar && contador <= 2) {
+            System.out.println("Iniciar sesion");
+            System.out.println("Ingrese DNI");
+            String DNISC = raja.nextLine();
+            System.out.println("Ingrese su Contraseña");
+            String ClaveSC = raja.nextLine();
+            if (DNiIngresado.equals(DNISC) && ContrasenaIngresado.equals(ClaveSC)){
+                System.out.println("---Se a Iniciado Sesion---");
+                iniciar = true;
+                MenuPrincipal();
+            }
+            else {
+                System.out.println("Datos Incorrectos");
+                contador++;
+                System.out.println("Se realizo el Intento N°: " + contador);
+            }
+        }
+        if (contador > 2) {
+            System.out.println("El Acceso a sido Bloqueado");
+        }
+    }
+    public void Registro() {
+        System.out.println("Crear Una Cuenta");
+        System.out.println("Ingrese fecha de nacimiento");
+        System.out.println("Ingrese el dia");
+        int dia = raja.nextInt();
+        System.out.println("Ingrese el Mes (MM)");
+        int mes = raja.nextInt();
+        System.out.println("Ingrese el Año (AAAA)");
+        int ano = raja.nextInt();
+        LocalDate fechanacimiento = LocalDate.of(ano, mes, dia);
+        LocalDate fechaActual = LocalDate.now();
+        int edad = Period.between(fechanacimiento, fechaActual).getYears();
+        raja.nextLine();
+        if (edad >= 18&&edad<=90) {
+            System.out.println("Crear cuenta");
+            System.out.println("Ingrese Nombres");
+            NombreIngresado = raja.nextLine();
+            System.out.println("Ingrese Apellidos");
+            ApellidoIngresado = raja.nextLine();
+            while (true) {
+                System.out.println("Ingrese DNI");
+                DNiIngresado = raja.nextLine();
+                if (DNiIngresado.length() == 8 && DNiIngresado.matches("[0-9]+")) {
+                    System.out.println("DNI Valido");
+                    break;
+                } else {
+                    System.out.println("DNI no Valido");
+                }
+            }
+            while (true) {
+                System.out.println("ingrese su email (debe ser Gmail): ");
+                String CorreoIngresado = raja.nextLine();
+                if (CorreoIngresado.endsWith("@gmail.com")){
+                    System.out.println("Correo aceptado");
+                    break;
+                }else {
+                    System.out.println("Correo no valido");
+                }
+            }
+            while (true) {
+                System.out.println("Ingrese una contraseña");
+                ContrasenaIngresado = raja.nextLine();
+                if (Requisitos(ContrasenaIngresado)) {
+                    System.out.println("Contraseña valida");
+                    break;
+                } else {
+                    System.out.println("Error");
+                }
+            }
+            System.out.println("Se a Creado Su Cuenta Exitosamente");
+        }
+        else if (edad>=1&&edad<=17) {
+            System.out.println("Usted es Menor de Edad  no puede  Crear una cuenta en esta Aplicacion");
+
+        } else {
+            System.out.println("edad no valida");
+        }
+        raja.nextLine();
+    }
+    public static boolean Requisitos(String password) {
+        if (password.length() < 12) {
+            return false;
+        }
+        boolean tieneMayuscula = false;
+        boolean tieneMinuscula = false;
+        boolean tieneNumero = false;
+        boolean tieneSimbolo = false;
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) tieneMayuscula = true;
+            else if (Character.isLowerCase(c)) tieneMinuscula = true;
+            else if (Character.isDigit(c)) tieneNumero = true;
+            else tieneSimbolo = true;
+        }
+
+        return tieneMayuscula && tieneMinuscula && tieneNumero && tieneSimbolo;
+    }
+    public void MenuPrincipal(){
+        int OpcionPrincipal;
+        do {
+                System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+                System.out.println("     BIENVENIDO A GLORIA   ");
+                System.out.println(" ");
+                System.out.println("        MENU PRINCIPAL ");
+                System.out.println(" ");
+                System.out.println("1. Leches Evaporadas");
+                System.out.println("2. Leches UHT");
+                System.out.println("3. Yogures y Alimentos Lacteos");
+                System.out.println("4. Derivados Lacteos");
+                System.out.println("5. Alimentos");
+                System.out.println("6. Bebidas");
+                System.out.println("7. Pagar");
+                System.out.println("0. Salir");
+                System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+                System.out.println("Seleccione una categoría ");
+            OpcionPrincipal=raja.nextInt();
+            switch (OpcionPrincipal){
+                case 1:
+                    LechesEvaporadas();
+                    break;
+                case 2:
+                    LechesUHT();
+                    break;
+                case 3:
+                    YoguresyAlimentosLacteos();
+                    break;
+                case 4:
+                    DerivadosdeLacteos();
+                    break;
+                case 5:
+                    Alimentos();
+                    break;
+                case 6:
+                    Bebidas();
+                    break;
+                case 7:
+                    RealizarPago();
+                    break;
+                case 0:
+                    System.out.println("Saliendo");
+                    break;
+                default:
+                    System.out.println("Esta Opcion no Existe");
+                    break;
+            }
+        }while (OpcionPrincipal!=0);
+    }
+
+    public void LechesEvaporadas(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("  CATEGORIA LECHES EVAPORADAS   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Reconstituida Entera");
+        System.out.println("2. Gloria Sin Lactosa");
+        System.out.println("3. Gloria NIños");
+        System.out.println("4. Gloria Evaporada Entera");
+        System.out.println("5. Bonle Cremosa");
+        System.out.println("6. Bonle Punche");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("Seleccione una categoria   ");
+        int OpcionLechesUHT = raja.nextInt();
+        switch (OpcionLechesUHT) {
+            case 1:
+                GloriaReconstruidaEntera();
+                break;
+            case 2:
+                GloriaSinLactosa();
+                break;
+            case 3:
+                GloriaNinos();
+                break;
+            case 4:
+                GloriaEvaporadaEntera();
+                break;
+            case 5:
+                BonleCremosa();
+                break;
+            case 6:
+                BonlePunche();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+    public void GloriaReconstruidaEntera(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("            GLORIA RECONSTITUIDA ENTERA   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Reconstituida Entera (lata 400g) ------> S/5.50");
+        System.out.println("2. Gloria Reconstituida Entera (lata 170g) ------> S/2.50");
+        System.out.println("0. Regresar a Categoria Leches Evaporadas");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaReconstruidaEntera=raja.nextInt();
+        switch (OpcionGloriaReconstruidaEntera){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Reconstituida Entera (lata 400g)      |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Reconstituida Entera (lata 170g)      |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaSinLactosa(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                GLORIA SIN LACTOSA   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Sin Lactosa (lata 400g) ------> S/5.50");
+        System.out.println("2. Gloria Sin Lactosa (lata 170g) ------> S/2.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaSinLactosa=raja.nextInt();
+        switch (OpcionGloriaSinLactosa){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Sin Lactosa (lata 400g)               |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Sin Lactosa (lata 170g)               |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaNinos(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                      GLORIA NIÑOS   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Niños (lata 400g) ------> S/5.50");
+        System.out.println("2. Gloria Niños (lata 170g) ------> S/2.50");
+        System.out.println("0. Regresar a Categoria Leches Evaporadas");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaNinos=raja.nextInt();
+        switch (OpcionGloriaNinos){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Niños (lata 400g)                     |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Niños (lata 170g)                     |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaEvaporadaEntera(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("             GLORIA EVAPORDA ENTERA   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Evaporada Entera (lata 400g) ------> S/5.50");
+        System.out.println("2. Gloria Evaporada Entera (lata 170g) ------> S/2.50");
+        System.out.println("0. Regresar a Categoria Leches Evaporadas");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaEvaporadaEntera=raja.nextInt();
+        switch (OpcionGloriaEvaporadaEntera){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Evaporada Entera (lata 400g)          |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Evaporada Entera (lata 170g)          |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void BonleCremosa(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("            GLORIA RECONSTITUIDA ENTERA   ");
+        System.out.println(" ");
+        System.out.println("1. Bonle Cremosa (lata 400g)-----------> S/5.50");
+        System.out.println("2. Bonle Cremosa (lata 170g) -----------> S/2.50");
+        System.out.println("0. Regresar a Categoria Leches Evaporadas");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaEvaporadaEntera=raja.nextInt();
+        switch (OpcionGloriaEvaporadaEntera){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Bonle Cremosa (lata 400g)                    |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Bonle Cremosa (lata 170g)                    |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void BonlePunche(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("            GLORIA RECONSTITUIDA ENTERA   ");
+        System.out.println(" ");
+        System.out.println("1. Bonle Punche (lata 400g) ------------> S/5.50");
+        System.out.println("2. Bonle Punche (lata 170g) ------------> S/2.50");
+        System.out.println("0. Regresar a Categoria Leches Evaporadas");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionBonlePunche=raja.nextInt();
+        switch (OpcionBonlePunche){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Bonle Punche (lata 400g)                     |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Bonle Punche (lata 170g)                     |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+
+    public void LechesUHT(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("  CATEGORIA LECHES UHT   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria TTP UHT");
+        System.out.println("2. Gloria Bolsa UHT");
+        System.out.println("3. Chicolac Chocolatada UHT");
+        System.out.println("4. Bonle UHT");
+        System.out.println("5. Gloria Leche en Polvo");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("Seleccione una categoria   ");
+        int OpcionLechesUHT = raja.nextInt();
+        switch (OpcionLechesUHT) {
+            case 1:
+                GloriaTTP();
+                break;
+            case 2:
+                GloriaBolsa();
+                break;
+            case 3:
+                ChicolacChocolatada();
+                break;
+            case 4:
+                BonleUHT();
+                break;
+            case 5:
+                GloriaLecheenPolvo();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+    public void GloriaTTP(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA TTP UHT   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Entera      (caja 1L) ------------> S/6.50");
+        System.out.println("2. Gloria Liht        (caja 1L) ------------> S/6.50");
+        System.out.println("3. Gloria Sin Lactosa (caja 1L) ------------> S/6.50");
+        System.out.println("4. Gloria chocolate   (caja 1L) ------------> S/6.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaTTP=raja.nextInt();
+        switch (OpcionGloriaTTP){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 6.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Entera      (caja 1L)                 |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 6.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Liht        (caja 1L)                 |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 6.50;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Gloria Sin Lactosa (caja 1L)                 |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            case 4:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad4 = raja.nextInt();
+                double Total4 = cantidad4 * 6.50;
+                double IGV4 = Total4 * 0.18;
+                double SubTotal4=Total4-IGV4;
+                System.out.println("El SubTotal es de: $"+SubTotal4);
+                System.out.println("El Total a Pagar es: $" + Total4);
+                System.out.println("El IGV es de: " + IGV4);
+                ArraysProductos.add("|---"+cantidad4+"---|Gloria chocolate   (caja 1L)                 |"+Total4+"--|");
+                ArraysPrecios.add(Total4);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaBolsa(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA BOLSAS UHT   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Entera      (bolsa 900 ml) --------> S/5.00");
+        System.out.println("2. Gloria Liht        (bolsa 900 ml) --------> S/5.00");
+        System.out.println("3. Gloria Sin Lactosa (bolsa 900 ml) --------> S/5.00");
+        System.out.println("4. Gloria chocolate   (bolsa 900 ml) --------> S/5.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaBolsa=raja.nextInt();
+        switch (OpcionGloriaBolsa){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 5.00;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Entera      (bolsa 900 ml)            |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 5.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Liht        (bolsa 900 ml)            |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 5.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Gloria Sin Lactosa (bolsa 900 ml)            |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            case 4:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad4 = raja.nextInt();
+                double Total4 = cantidad4 * 5.00;
+                double IGV4 = Total4 * 0.18;
+                double SubTotal4=Total4-IGV4;
+                System.out.println("El SubTotal es de: $"+SubTotal4);
+                System.out.println("El Total a Pagar es: $" + Total4);
+                System.out.println("El IGV es de: " + IGV4);
+                ArraysProductos.add("|---"+cantidad4+"---|Gloria chocolate   (bolsa 900 ml)            |"+Total4+"--|");
+                ArraysPrecios.add(Total4);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+
+    }
+    public void ChicolacChocolatada(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                CHICOLAC CHOCOLATADA UHT   ");
+        System.out.println(" ");
+        System.out.println("1. Chicolac Chocolatada UHT (caja 180 ml) ------------> S/2.50");
+        System.out.println("2. Chicolac Chocolatada UHT (sachet 100 ml) ----------> S/1.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionChicolacChocolatada=raja.nextInt();
+        switch (OpcionChicolacChocolatada){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 2.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Chicolac Chocolatada UHT (caja 180 ml)      |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 1.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Chicolac Chocolatada UHT (sachet 100 ml)    |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void BonleUHT(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                    BONLE UHT   ");
+        System.out.println(" ");
+        System.out.println("1. Bonle chocolate   (bolsa 800 ml) ------------> S/4.50");
+        System.out.println("2. Bonle Sin Lactosa (bolsa 800 ml) ------------> S/4.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionBonleUHT=raja.nextInt();
+        switch (OpcionBonleUHT){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 4.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Bonle chocolate   (bolsa 800 ml)             |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 4.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Bonle Sin Lactosa (bolsa 800 ml)             |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaLecheenPolvo(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA LECHE EN POLVO   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Leche en Polvo (sachet 96g) ------> S/  4.50");
+        System.out.println("2. Gloria Leche en Polvo (lata 800g) -------> S/ 36.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionYogurtParcialmenteDescremado=raja.nextInt();
+        switch (OpcionYogurtParcialmenteDescremado){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 4.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Leche en Polvo (sachet 96g)           |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 36.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Leche en Polvo (lata 800g)            |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+
+    public void YoguresyAlimentosLacteos(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("  CATEGORIA YOGURES Y ALIMENTOS LACTEOS   ");
+        System.out.println(" ");
+        System.out.println("1. Yogurt Parcialmente Descremado");
+        System.out.println("2. Milkito Yogurt Bebible");
+        System.out.println("3. Slim Yogurt");
+        System.out.println("4. Gloria Yogurt Frutado");
+        System.out.println("5. Gloria Griego Yogurt");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("Seleccione una categoria   ");
+        int OpcionYoguresyAlimentosLacteos = raja.nextInt();
+        switch (OpcionYoguresyAlimentosLacteos) {
+            case 1:
+                YogurtParcialmenteDescremado();
+                break;
+            case 2:
+                MilkitoYogurtBebible();
+                break;
+            case 3:
+                SlimYogurt();
+                break;
+            case 4:
+                GloriaYogurtFrutado();
+                break;
+            case 5:
+                GloriaGriegoYogurt();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+
+    }
+
+    public void YogurtParcialmenteDescremado(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 YOGURT PARCIALMENTE DESCREMADO  ");
+        System.out.println(" ");
+        System.out.println("1. Yogurt Parcialmente Descremado (galonera 1.9 kg) ----> S/ 12.50");
+        System.out.println("2. Yogurt Parcialmente Descremado (botella 1 kg) -------> S/  6.00");
+        System.out.println("3. Yogurt Parcialmente Descremado (botella 500 g)-------> S/  3.00");
+        System.out.println("4. Yogurt Parcialmente Descremado (botella 180 g)-------> S/  1.80");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionYogurtParcialmenteDescremado=raja.nextInt();
+        switch (OpcionYogurtParcialmenteDescremado){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 12.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Yogurt Parcialmente Descremado (galonera 1.9 kg)|"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 6.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Yogurt Parcialmente Descremado (botella 1 kg)|"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 3.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Yogurt Parcialmente Descremado (botella 500 g)|"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            case 4:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad4 = raja.nextInt();
+                double Total4 = cantidad4 * 1.00;
+                double IGV4 = Total4 * 0.18;
+                double SubTotal4=Total4-IGV4;
+                System.out.println("El SubTotal es de: $"+SubTotal4);
+                System.out.println("El Total a Pagar es: $" + Total4);
+                System.out.println("El IGV es de: " + IGV4);
+                ArraysProductos.add("|---"+cantidad4+"---|Yogurt Parcialmente Descremado (botella 180 g)|"+Total4+"--|");
+                ArraysPrecios.add(Total4);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void MilkitoYogurtBebible(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 MILKITO YOGURT BEBIBLE   ");
+        System.out.println(" ");
+        System.out.println("1. Milkito Yogurt Bebible (galonera 1.9 kg) ----> S/  40.50");
+        System.out.println("2. Milkito Yogurt Bebible (botella 1 kg) -------> S/ 36.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionYogurtParcialmenteDescremado=raja.nextInt();
+        switch (OpcionYogurtParcialmenteDescremado){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 40.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Milkito Yogurt Bebible (galonera 1.9 kg)     |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 36.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Milkito Yogurt Bebible (botella 1 kg)        |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void SlimYogurt(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println("                      SLIM YOGURT   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Leche en Polvo (galonera 1.7 kg) ----> S/ 9.50");
+        System.out.println("2. Gloria Leche en Polvo (botella 1 kg) -------> S/ 6.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionYogurtParcialmenteDescremado=raja.nextInt();
+        switch (OpcionYogurtParcialmenteDescremado){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 9.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Leche en Polvo (galonera 1.7 kg)      |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 6.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Leche en Polvo (botella 1 kg)         |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaYogurtFrutado(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println("                 GLORIA YOGURT FRUTADO   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Yogurt Frutado Fresa (vaso 120g) ------> S/  4.50");
+        System.out.println("2. Gloria Yogurt Frutado Mango (vaso 120g) -------> S/ 3.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionYogurtParcialmenteDescremado=raja.nextInt();
+        switch (OpcionYogurtParcialmenteDescremado){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 4.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Yogurt Frutado Fresa (vaso 120g)      |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 3.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Yogurt Frutado Mango (vaso 120g)      |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaGriegoYogurt(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA GRIEGO YOGURT   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Griego Yogurt (bolsa 800g) ------> S/ 7.50");
+        System.out.println("2. Gloria Griego Yogurt (vaso 120g) -------> S/ 2.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionYogurtParcialmenteDescremado=raja.nextInt();
+        switch (OpcionYogurtParcialmenteDescremado){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 7.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Griego Yogurt (bolsa 800g)            |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 2.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Griego Yogurt (vaso 120g)             |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+
+
+    public void DerivadosdeLacteos(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("  CATEGORIA DERIVADOS DE LACTEOS   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Mantequilla");
+        System.out.println("2. Gloria Leche Condensada");
+        System.out.println("3. Bonle Quesos");
+        System.out.println("4. Bonle Manjarblanco");
+        System.out.println("5. Gloria Crema de Leche");
+        System.out.println("0. Regresar al Menu Principal");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("Seleccione una categoria   ");
+        int OpcionDerivadosdeLacteos = raja.nextInt();
+        switch (OpcionDerivadosdeLacteos) {
+            case 1:
+                GloriaMantequilla();
+                break;
+            case 2:
+                GloriaLecheCondensada();
+                break;
+            case 3:
+                BonleQuesos();
+                break;
+            case 4:
+                BonleManjarblanco();
+                break;
+            case 5:
+                GloriaCremadeLeche();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+    public void GloriaMantequilla() {
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA MANTEQUILLA");
+        System.out.println(" ");
+        System.out.println("1. Gloria Mantequilla (pote 390g) --------> S/ 17.50");
+        System.out.println("2. Gloria Mantequilla (pote 200g) --------> S/ 11.50");
+        System.out.println("3. Gloria Mantequilla (barra 200g) -------> S/ 11.00");
+        System.out.println("4. Gloria Mantequilla (barra 90g) ---- ---> S/  6.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaMermelada = raja.nextInt();
+        switch (OpcionGloriaMermelada) {
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 17.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1 = Total1 - IGV1;
+                System.out.println("El SubTotal es de: $" + SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Mantequilla (pote 390g)               |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 11.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2 = Total2 - IGV2;
+                System.out.println("El SubTotal es de: $" + SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Mantequilla (pote 200g)               |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 11.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3 = Total3 - IGV3;
+                System.out.println("El SubTotal es de: $" + SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Gloria Mantequilla (barra 200g               |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            case 4:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad4 = raja.nextInt();
+                double Total4 = cantidad4 * 6.00;
+                double IGV4 = Total4 * 0.18;
+                double SubTotal4 = Total4 - IGV4;
+                System.out.println("El SubTotal es de: $" + SubTotal4);
+                System.out.println("El Total a Pagar es: $" + Total4);
+                System.out.println("El IGV es de: " + IGV4);
+                ArraysProductos.add("|---"+cantidad4+"---|Gloria Mantequilla (barra 90g)               |"+Total4+"--|");
+                ArraysPrecios.add(Total4);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaLecheCondensada(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA LECHE CONDENSADA ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Leche Condensada (doypack 200g) ------> S/ 6.50");
+        System.out.println("2. Gloria Leche Condensada (lata 390g) ---------> S/ 8.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaLecheCondensada=raja.nextInt();
+        switch (OpcionGloriaLecheCondensada){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 6.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Leche Condensada (doypack 200g)       |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 8.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Leche Condensada (lata 390g)          |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+
+    }
+    public void BonleQuesos(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                    BONLE QUESOS   ");
+        System.out.println(" ");
+        System.out.println("1. Bonle Quesos Adam    (500g) -----.-> S/ 20.50");
+        System.out.println("2. Bonle Quesos Cheddar (130g) -------> S/  7.00");
+        System.out.println("3. Bonle Quesos natural (130g) -------> S/  7.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionBonleQuesos=raja.nextInt();
+        switch (OpcionBonleQuesos){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 20.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Bonle Quesos Adam    (500g)                  |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 7.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Bonle Quesos Cheddar (130g)                  |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 7.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Bonle Quesos natural (130g)                  |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void BonleManjarblanco(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                  BONLE MANJARBLANCO   ");
+        System.out.println(" ");
+        System.out.println("1. Bonle Manjasblanco (sachet 500g) ------> S/ 9.50");
+        System.out.println("2. Bonle Manjasblanco (bolsa 200g) -------> S/ 6.00");
+        System.out.println("3. Bonle Manjasblanco (pote 250g) --------> S/ 6.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionBonleManjarblanco=raja.nextInt();
+        switch (OpcionBonleManjarblanco){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 9.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Bonle Manjasblanco (sachet 500g)             |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 6.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Bonle Manjasblanco (bolsa 200g)              |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 6.50;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Bonle Manjasblanco (pote 250g)               |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaCremadeLeche(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA CREMA DE LECHE ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Crema de Leche (TIP 200g) ------> S/  9.50");
+        System.out.println("2. Gloria Crema de Leche (bolsa 900g) ----> S/ 26.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriadeLeche=raja.nextInt();
+        switch (OpcionGloriadeLeche){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 9.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Crema de Leche (TIP 200g)             |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 26.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Crema de Leche (bolsa 900             |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+
+    public void Alimentos() {
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("  CATEGORIA ALIMENTOS  ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Mermelada");
+        System.out.println("2. Gloria Paneton Tradicional");
+        System.out.println("3. Gloria Conservas de Pescado");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("Seleccione una categoria   ");
+        int OpcionAlimentos = raja.nextInt();
+        switch (OpcionAlimentos) {
+            case 1:
+                GloriaMermelada();
+                break;
+            case 2:
+                GloriaPanetonTradicional();
+                break;
+            case 3:
+                GloriaConservasdePescado();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+    public void GloriaMermelada(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                  GLORIA MERMELADA   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Mermelada (pote 320g) --------> S/  4.50");
+        System.out.println("2. Gloria Mermelada (vaso 310g) --------> S/  7.00");
+        System.out.println("3. Gloria Mermelada (barril 1 kg) ------> S/ 14.50");
+        System.out.println("4. Gloria Mermelada (sachet 100g) ------> S/  2.00");
+        System.out.println("5. Gloria Mermelada (frasco 200g) ------> S/  4.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaMermelada=raja.nextInt();
+        switch (OpcionGloriaMermelada){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 4.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Mermelada (pote 320g)                 |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 7.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Mermelada (vaso 310g)                 |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 14.50;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Gloria Mermelada (barril 1 k                 |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            case 4:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad4 = raja.nextInt();
+                double Total4 = cantidad4 * 2.00;
+                double IGV4 = Total4 * 0.18;
+                double SubTotal4=Total4-IGV4;
+                System.out.println("El SubTotal es de: $"+SubTotal4);
+                System.out.println("El Total a Pagar es: $" + Total4);
+                System.out.println("El IGV es de: " + IGV4);
+                ArraysProductos.add("|---"+cantidad4+"---|Gloria Mermelada (sachet 100)                |"+Total4+"--|");
+                ArraysPrecios.add(Total4);
+                MenuPrincipal();
+                break;
+            case 5:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad5 = raja.nextInt();
+                double Total5 = cantidad5 * 4.50;
+                double IGV5 = Total5 * 0.18;
+                double SubTotal5=Total5-IGV5;
+                System.out.println("El SubTotal es de: $"+SubTotal5);
+                System.out.println("El Total a Pagar es: $" + Total5);
+                System.out.println("El IGV es de: " + IGV5);
+                ArraysProductos.add("|---"+cantidad5+"---|Gloria Mermelada (frasco 200g)               |"+Total5+"--|");
+                ArraysPrecios.add(Total5);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaPanetonTradicional(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                GLORIA PANETON TRADICIONAL   ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Paneton Tradicional (bolsa 900g) ------> S/ 23.50");
+        System.out.println("2. Gloria Paneton Tradicional (lata 900g) -------> S/ 30.00");
+        System.out.println("3. Gloria Paneton Tradicional (caja 900g) -------> S/ 26.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaMermelada=raja.nextInt();
+        switch (OpcionGloriaMermelada){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 23.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Gloria Paneton Tradicional (bolsa 900g)      |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 30.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Gloria Paneton Tradicional (lata 900g)       |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 26.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Gloria Paneton Tradicional (caja 900g)       |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaConservasdePescado(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA LECHE EN POLVO   ");
+        System.out.println(" ");
+        System.out.println("1. Filete de Atún en Agua y Sal GLORIA     (Lata 140g) ------> S/ 6.50");
+        System.out.println("2. Trozos de Atún en Aceite Vegetal GLORIA (Lata 140g) ------> S/ 5.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaMermelada=raja.nextInt();
+        switch (OpcionGloriaMermelada){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 6.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Filete de Atún en Agua y Sal GLORIA     (Lata 140g)|"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 5.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Trozos de Atún en Aceite Vegetal GLORIA (Lata 140g)|"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+
+    public void Bebidas(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("  CATEGORIA BEBIDAS  ");
+        System.out.println(" ");
+        System.out.println("1. Gloria Bebida de fruta");
+        System.out.println("2. Gloria Bebidas Caseras");
+        System.out.println("3. Tampico Refrescos Cifrus Punch");
+        System.out.println("4. Gloria Shake");
+        System.out.println("5. Pura Vida Agua");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■");
+        System.out.println("Seleccione una categoria   ");
+        int OpcionBebida=raja.nextInt();
+        switch (OpcionBebida){
+            case 1:
+                GloriaBebidadefruta();
+                break;
+            case 2:
+                GloriaBebidasCaseras();
+                break;
+            case 3:
+                TampicoRefrescosCifrusPunch();
+                break;
+            case 4:
+                GloriaShake();
+                break;
+            case 5:
+                PuraVidaAgua();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+    public void GloriaBebidadefruta(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA BEBIDAS DE FRUTA   ");
+        System.out.println(" ");
+        System.out.println("1. Bebida GLORIA Naranja  (Caja 1L) -------> S/ 4.00");
+        System.out.println("2. Bebida GLORIA Mango    (Caja 1L) -------> S/ 4.00");
+        System.out.println("3. Bebida GLORIA Piña     (Caja 1L) -------> S/ 4.00");
+        System.out.println("4. Bebida GLORIA Maracuya (Caja 1L) -------> S/ 4.00");
+        System.out.println("5. Bebida GLORIA Durazno  (Caja 1L) -------> S/ 4.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaBebidadefruta=raja.nextInt();
+        switch (OpcionGloriaBebidadefruta){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 4.00;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Bebida GLORIA Naranja  (Caja 1L)             |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 4.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Bebida GLORIA Mango    (Caja 1L)             |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 4.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Bebida GLORIA Piña     (Caja 1L)             |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            case 4:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad4 = raja.nextInt();
+                double Total4 = cantidad4 * 4.00;
+                double IGV4 = Total4 * 0.18;
+                double SubTotal4=Total4-IGV4;
+                System.out.println("El SubTotal es de: $"+SubTotal4);
+                System.out.println("El Total a Pagar es: $" + Total4);
+                System.out.println("El IGV es de: " + IGV4);
+                ArraysProductos.add("|---"+cantidad4+"---|Bebida GLORIA Maracuya (Caja 1L)             |"+Total4+"--|");
+                ArraysPrecios.add(Total4);
+                MenuPrincipal();
+                break;
+            case 5:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad5 = raja.nextInt();
+                double Total5 = cantidad5 * 4.00;
+                double IGV5 = Total5 * 0.18;
+                double SubTotal5=Total5-IGV5;
+                System.out.println("El SubTotal es de: $"+SubTotal5);
+                System.out.println("El Total a Pagar es: $" + Total5);
+                System.out.println("El IGV es de: " + IGV5);
+                ArraysProductos.add("|---"+cantidad5+"---|Bebida GLORIA Durazno  (Caja 1L)             |"+Total5+"--|");
+                ArraysPrecios.add(Total5);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaBebidasCaseras(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                 GLORIA BEBIDAS CASERAS  ");
+        System.out.println(" ");
+        System.out.println("1. Refresco GLORIA Chicha Morada Casera (Botella 3L) ------> S/ 7.50");
+        System.out.println("2. Refresco GLORIA Chicha Morada Casera (Botella 400 ml) --> S/ 1.80");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaBebidasCaseras=raja.nextInt();
+        switch (OpcionGloriaBebidasCaseras){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 7.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Refresco Chicha Morada Casera (Botella 3L)   |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 1.80;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Refresco Chicha Morada Casera(Botella 400 ml)|"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void TampicoRefrescosCifrusPunch(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("             TAMPICO REFRESCOS CIFRUS PUNCH   ");
+        System.out.println(" ");
+        System.out.println("1. TAMPICO Citrus Punch  (Botella 3L) -------> S/ 7.50");
+        System.out.println("2. TAMPICO Citrus Punch  (Botella 1.5L) -----> S/ 4.00");
+        System.out.println("3. TAMPICO Citrus Punch  (Botella 500 ml) ---> S/ 2.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionTampicoRefrescosCifrusPunch=raja.nextInt();
+        switch (OpcionTampicoRefrescosCifrusPunch){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 7.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|TAMPICO Citrus Punch  (Botella 3L)           |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 4.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|TAMPICO Citrus Punch  (Botella 1.5L)         |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 2.00;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|TAMPICO Citrus Punch  (Botella 500 ml)       |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void GloriaShake(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                     GLORIA SHAKE  ");
+        System.out.println(" ");
+        System.out.println("1. Shake Mocaccino UHT GLORIA  (Botella 320ml) ------> S/  3.50");
+        System.out.println("2. Shake Capuccino UHT GLORIA  (Botella 320ml) -------> S/ 3.50");
+        System.out.println("3. Shake Chocolate UHT GLORIA  (Botella 320ml) -------> S/ 3.50");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionGloriaShake=raja.nextInt();
+        switch (OpcionGloriaShake){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 3.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Shake Mocaccino UHT GLORIA  (Botella 320ml)  |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar ");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 3.50;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Shake Capuccino UHT GLORIA  (Botella 320ml)  |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            case 3:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad3 = raja.nextInt();
+                double Total3 = cantidad3 * 3.50;
+                double IGV3 = Total3 * 0.18;
+                double SubTotal3=Total3-IGV3;
+                System.out.println("El SubTotal es de: $"+SubTotal3);
+                System.out.println("El Total a Pagar es: $" + Total3);
+                System.out.println("El IGV es de: " + IGV3);
+                ArraysProductos.add("|---"+cantidad3+"---|Shake Chocolate UHT GLORIA  (Botella 320ml)  |"+Total3+"--|");
+                ArraysPrecios.add(Total3);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+    public void PuraVidaAgua(){
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■  ");
+        System.out.println("                    PURA VIDA AGUA  ");
+        System.out.println(" ");
+        System.out.println("1. Agua Pura Vida  (botella 3L ) ----------> S/ 6.50");
+        System.out.println("2. Agua Pura Vida  (botella 500 ml) -------> S/ 1.00");
+        System.out.println("■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ■ ");
+        System.out.println(" Seleccione una opcion  ");
+        int OpcionPuraVidaAgua=raja.nextInt();
+        switch (OpcionPuraVidaAgua){
+            case 1:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad1 = raja.nextInt();
+                double Total1 = cantidad1 * 6.50;
+                double IGV1 = Total1 * 0.18;
+                double SubTotal1=Total1-IGV1;
+                System.out.println("El SubTotal es de: $"+SubTotal1);
+                System.out.println("El Total a Pagar es: $" + Total1);
+                System.out.println("El IGV es de: " + IGV1);
+                ArraysProductos.add("|---"+cantidad1+"---|Agua Pura Vida  (botella 3L )                |"+Total1+"--|");
+                ArraysPrecios.add(Total1);
+                MenuPrincipal();
+                break;
+            case 2:
+                System.out.println("Cuantos Unidades va a Llevar");
+                int cantidad2 = raja.nextInt();
+                double Total2 = cantidad2 * 1.00;
+                double IGV2 = Total2 * 0.18;
+                double SubTotal2=Total2-IGV2;
+                System.out.println("El SubTotal es de: $"+SubTotal2);
+                System.out.println("El Total a Pagar es: $" + Total2);
+                System.out.println("El IGV es de: " + IGV2);
+                ArraysProductos.add("|---"+cantidad2+"---|Agua Pura Vida  (botella 500 ml)             |"+Total2+"--|");
+                ArraysPrecios.add(Total2);
+                MenuPrincipal();
+                break;
+            default:
+                System.out.println("Esta Opcion no Existe");
+                break;
+        }
+    }
+
+    public double sumarPrecios() {
+        double TotalDeSuma = 0;
+        for (double SumarArray : ArraysPrecios) {
+            TotalDeSuma += SumarArray;
+        }
+        return TotalDeSuma;
+    }
+
+    public void RealizarPago() {
         raja.nextLine();
         double ResultadoProductos=sumarPrecios();
         double IGV = ResultadoProductos * 0.18;
@@ -153,3 +2019,10 @@ public void RealizarPago() {
                 System.out.println("Esta Opcion no existe");
                 break;
         }
+    }
+
+    public static void main(String[]args){
+        Uwux2 Mostra=new Uwux2();
+        Mostra.Empezar();
+    }
+}
